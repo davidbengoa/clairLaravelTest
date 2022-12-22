@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * PayItem
@@ -16,6 +14,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class PayItem extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'amount',
+        'worked_hours',
+        'pay_rate',
+        'pay_date',
+        'external_id',
+        'user_id',
+        'business_id',
+    ];
 
     public function findPayItem($externalId, $userId, $businessId): Builder|Model|null
     {
@@ -33,7 +40,4 @@ class PayItem extends Model
             ->delete();
     }
 
-    public function toUser() : BelongsTo {
-        return $this->belongsTo();
-    }
 }

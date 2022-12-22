@@ -1,5 +1,8 @@
 <?php
 
+use App\Jobs\BusinessPayItem;
+use App\Models\Business;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    BusinessPayItem::dispatch(Business::find(1));
     return view('welcome');
 });
