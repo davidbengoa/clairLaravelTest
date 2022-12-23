@@ -4,26 +4,41 @@ namespace Tests\Unit;
 
 use App\Models\Business;
 use App\Services\SyncRoutine;
+use App\Utils\Apis;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Mockery;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 class SyncRoutineTest extends TestCase
 {
     use DatabaseMigrations;
-    private SyncRoutine $syncRouting;
+
 
     public function setUp(): void
     {
         parent::setUp();
         $this->seed();
-        $this->syncRouting = new SyncRoutine();
     }
 
-    public function test_example()
+    public function test_run_successfully()
     {
         $business = Business::find(1);
         $this->assertNotNull($business);
-        //$this->syncRouting->syncPayItems($business);
+        $syncRouting = new SyncRoutine();
+
+//        $reflector = new \ReflectionProperty(SyncRoutine::class, 'api');
+//        $reflector->setAccessible(true);
+//        $reflector->setValue();
+
+//        $this->mock(Apis::class, function (MockInterface $mock) {
+//            $mock->shouldReceive('clairPayItemSync')
+//                ->once()
+//                ->andReturn([]);
+//        });
+
+
+        $syncRouting->syncPayItems($business);
         $this->assertTrue(true);
     }
 
